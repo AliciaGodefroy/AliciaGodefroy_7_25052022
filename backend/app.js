@@ -7,8 +7,9 @@ dotenv.config();
 // const rateLimit = require('express-rate-limit');
 // const helmet = require("helmet");
 
-//Changement test
+const userRoutes = require('./routes/user');
 
+// Connexion à la base de données MongoDB
 mongoose.connect(process.env.SECRET_DB,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
@@ -34,6 +35,8 @@ app.use((req, res, next) => {
 app.use(bodyParser.json()); //Donne accès au corps de la requête
 
 // app.use('/images', express.static(path.join(__dirname, 'images')));
+
+app.use('/api/auth', userRoutes);
 
 
 module.exports = app;
