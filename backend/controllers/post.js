@@ -109,7 +109,7 @@ exports.getAllPosts = (req, res, next) => {
 }
 
 // Pour ajouter/retirer un like ou un dislike
-exports.likeDislikePost = (req, res, next) => {
+exports.likePost = (req, res, next) => {
   let like = req.body.like // On récupère le nombre de likes
   let userId = req.body.userId // On récupère l'userId
   let postId = req.params.id // On récupère l'id de la sauce
