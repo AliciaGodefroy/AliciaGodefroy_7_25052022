@@ -9,14 +9,13 @@ dotenv.config();
 
 //Changement test
 
-// mongoose.connect(process.env.SECRET_DB,
-//   { useNewUrlParser: true,
-//     useUnifiedTopology: true })
-//   .then(() => console.log('Connexion à MongoDB réussie !'))
-//   .catch(() => console.log('Connexion à MongoDB échouée !'));
+mongoose.connect(process.env.SECRET_DB,
+  { useNewUrlParser: true,
+    useUnifiedTopology: true })
+  .then(() => console.log('Connexion à MongoDB réussie !'))
+  .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 const app = express();
-// app.use(helmet());
 
 // //Mesure de sécurité avec express-rate-limite
 // const limiter = rateLimit({
