@@ -8,6 +8,7 @@ dotenv.config();
 // const helmet = require("helmet");
 
 const userRoutes = require('./routes/user');
+const postRoutes = require('./routes/post');
 
 // Connexion à la base de données MongoDB
 mongoose.connect(process.env.SECRET_DB,
@@ -37,6 +38,7 @@ app.use(bodyParser.json()); //Donne accès au corps de la requête
 // app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use('/api/auth', userRoutes);
+app.use('/api/post', postRoutes);
 
 
 module.exports = app;
