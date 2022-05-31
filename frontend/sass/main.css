@@ -3,8 +3,56 @@
 /* BODY */
 body {
   color: black;
-  background-color: white;
-  background-image: url(images/image_de_fond.png);
-  margin: 0;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 992px) {
+  .container {
+    width: 1350px;
+    margin: auto;
+    max-width: 100%;
+  }
+}
+
+/* LOGO GROUPOMANIA */
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding-top: 130px;
+}
+
+.header__logo {
+  width: 230px;
+}
+
+.signup {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: absolute;
+  width: 144px;
+  height: 46px;
+  left: 50px;
+  top: 234px;
+  background: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  border-radius: 10px;
+}
+
+/* GLOBAL */
+.form {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: absolute;
+  width: 288px;
+  height: 419px;
+  left: 50px;
+  top: 292px;
+  background: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  border-radius: 10px;
 }
 /*# sourceMappingURL=main.css.map */
