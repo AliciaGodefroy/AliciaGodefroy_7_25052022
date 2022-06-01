@@ -2,8 +2,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:wght@400;500&family=Shrikhand&display=swap");
 /* BODY */
 body {
+  font-family: 'Lato', sans-serif;
   color: black;
   margin: 0 auto;
+  background: rgba(253, 45, 1, 0.6);
 }
 
 @media screen and (min-width: 992px) {
@@ -29,18 +31,52 @@ body {
   width: 230px;
 }
 
-/* INSCRIPTION */
-.signup {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+/* GLOBAL */
+.headerbis {
+  width: 288px;
   position: absolute;
-  width: 144px;
-  height: 46px;
   left: 50px;
-  top: 234px;
+  top: 220px;
+}
+
+.headerbis ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  padding: 0;
+}
+
+.headerbis ul li {
+  list-style: none;
+  padding: 10px 30px;
+}
+
+.headerbis ul li a {
+  text-decoration: none;
+}
+
+.headerbis__signup {
+  color: #FD2D01;
   background: #FFFFFF;
   border: 1px solid #FFFFFF;
   border-radius: 10px;
+  padding: 10px 30px;
+}
+
+.headerbis__signup a {
+  color: #FD2D01;
+  font-weight: 700;
+}
+
+.headerbis__login a {
+  color: #FFFFFF;
+  font-weight: 700;
 }
 
 /* CONNEXION */
@@ -50,11 +86,34 @@ body {
           box-sizing: border-box;
   position: absolute;
   width: 288px;
-  height: 419px;
+  height: 346px;
   left: 50px;
   top: 292px;
   background: #FFFFFF;
   border: 1px solid #FFFFFF;
   border-radius: 10px;
+}
+
+.form form div {
+  padding: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.form form div label {
+  color: #FD2D01;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.form form div input {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #9E9E9E;
 }
 /*# sourceMappingURL=main.css.map */

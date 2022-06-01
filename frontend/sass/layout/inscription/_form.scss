@@ -4,10 +4,27 @@
   box-sizing: border-box;
   position: absolute;
   width: 288px;
-  height: 419px;
+  height: 346px;  
   left: 50px;
   top: 292px;
   background: #FFFFFF;
   border: 1px solid #FFFFFF;
   border-radius: 10px;
+  form{
+    div{
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      label{
+        color: #FD2D01;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      input{
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #9E9E9E;
+      }
+    }
+  }
 }

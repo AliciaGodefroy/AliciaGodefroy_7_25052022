@@ -27,30 +27,32 @@
   <main>
     <header class="headerbis">
       <nav>
-        <ul>
-          <li class="headerbis__login">
+        <ul class="headerbis__list">
+          <li class="headerbis__signup">
             <a href="">Inscription</a>
           </li>
-          <li class="headerbis__signup">
+          <li class="headerbis__login">
             <a href="">Connexion</a>
           </li>
         </ul>
       </nav>
     </header>
 
-    <section class="signup">
-      <a href="http://">Inscription</a>
-    </section>
-
-    <section class="login">
-
-    </section>
-
     <section class="form">
-      <h3>Prénom</h3>
-      <h3>Prénom</h3>
-      <h3>Prénom</h3>
-
+      <form action="/ma-page-de-traitement" method="post">
+        <div>
+            <label for="pseudo">Pseudo</label>
+            <input type="text" id="pseudo" name="user_pseudo">
+        </div>
+        <div>
+            <label for="mail">Adresse email</label>
+            <input type="email" id="mail" name="user_mail">
+        </div>
+        <div>
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="user_password"></input>
+        </div>
+    </form>
     </section>
   </main>
   <!--MAIN-->

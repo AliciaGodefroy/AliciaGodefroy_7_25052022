@@ -1,17 +1,41 @@
-/* INSCRIPTION */
+/* GLOBAL */ 
 
-.signup{
-  box-sizing: border-box;
-
+.headerbis {
+  width: 288px;
   position: absolute;
-  width: 144px;
-  height: 46px;
   left: 50px;
-  top: 234px;
-
-  background: #FFFFFF;
-  border: 1px solid #FFFFFF;
-  border-radius: 10px;
+  top: 220px;
+  ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0;
+    li {
+      list-style: none;
+      padding: 10px 30px;
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+  &__signup{
+    color: #FD2D01;
+    background: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    border-radius: 10px;
+    padding: 10px 30px;
+    a{
+      color: #FD2D01;
+      font-weight: 700;
+    }
+  }
+  &__login{
+    a{
+      color: #FFFFFF;
+      font-weight: 700;
+    }
+  }
 }
+
 
 /* CONNEXION */
