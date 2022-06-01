@@ -27,4 +27,15 @@
       }
     }
   }
+  &__button{
+    background: #FD2D01;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 15px;
+    a{
+      text-decoration: none;
+      color: #FFFFFF;
+      font-weight: 700;
+    }
+  }
 }
