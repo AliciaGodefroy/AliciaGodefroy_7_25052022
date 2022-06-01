@@ -1,12 +1,10 @@
 /* GLOBAL */
 
 .form {
-  box-sizing: border-box;
-  position: absolute;
-  width: 288px;
-  height: 346px;  
-  left: 50px;
-  top: 292px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0px 50px;
   background: #FFFFFF;
   border: 1px solid #FFFFFF;
   border-radius: 10px;

@@ -1,10 +1,9 @@
 /* GLOBAL */ 
 
 .headerbis {
-  width: 288px;
-  position: absolute;
-  left: 50px;
-  top: 220px;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
   ul {
     display: flex;
     flex-direction: row;

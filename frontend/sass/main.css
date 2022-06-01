@@ -32,10 +32,13 @@ body {
 
 /* GLOBAL */
 .headerbis {
-  width: 288px;
-  position: absolute;
-  left: 50px;
-  top: 220px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 40px;
 }
 
 .headerbis ul {
@@ -81,13 +84,17 @@ body {
 /* CONNEXION */
 /* GLOBAL */
 .form {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  position: absolute;
-  width: 288px;
-  height: 346px;
-  left: 50px;
-  top: 292px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0px 50px;
   background: #FFFFFF;
   border: 1px solid #FFFFFF;
   border-radius: 10px;
