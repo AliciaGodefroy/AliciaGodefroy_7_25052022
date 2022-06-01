@@ -3,9 +3,8 @@
 /* BODY */
 body {
   font-family: 'Lato', sans-serif;
-  color: black;
+  color: white;
   margin: 0 auto;
-  background: rgba(253, 45, 1, 0.6);
 }
 
 @media screen and (min-width: 992px) {
@@ -122,6 +121,12 @@ body {
   border-radius: 5px;
   padding: 10px;
   margin: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .form__button a {
