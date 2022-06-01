@@ -9,7 +9,7 @@ const fs = require('fs');
 
 //Pour créer un objet
 exports.createPost = (req, res, next) => {
-  const postObject = JSON.parse(req.body.sauce);
+  const postObject = JSON.parse(req.body.post);
   delete postObject._id;
   const post = new Post({
     ...postObject,
@@ -69,8 +69,7 @@ exports.deletePost = (req, res, next) => {
         });
     })
     .catch(error => res.status(500).json({ error }));
-    } 
-    else {
+    } else {
       res.status(401).json({ message: "Vous n'avez pas la permission !"})
     }
   })

@@ -29,6 +29,7 @@ body {
   width: 230px;
 }
 
+/* INSCRIPTION */
 .signup {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -42,6 +43,7 @@ body {
   border-radius: 10px;
 }
 
+/* CONNEXION */
 /* GLOBAL */
 .form {
   -webkit-box-sizing: border-box;
