@@ -1,10 +1,7 @@
 /* eslint-disable */
 <template>
   <div id="app">
-    <header class="header">
-    <img src="./assets/icon-left-font-monochrome-white.png" alt="Logo Groupomania"
-    class="header__logo">
-    </header>
+    <home-header></home-header>
     <nav>
       <router-link to="/">Inscription</router-link>
       <router-link to="/login">Connexion</router-link>
@@ -13,6 +10,19 @@
     </nav>
   </div>
 </template>
+
+<script>
+import HomeHeader from './components/HomeHeader.vue';
+
+export default {
+  components: {
+    'home-header': HomeHeader,
+  },
+  data() {
+    return {};
+  },
+};
+</script>
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:wght@400;500&family=Shrikhand&display=swap');
@@ -43,7 +53,7 @@ nav a {
   font-weight: bold;
   color: #FFFF;
   text-decoration: none;
-  padding: 10px;
+  padding: 10px 20px;
 }
 
 nav a.router-link-exact-active {
