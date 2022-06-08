@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "axios": "^0.27.2",
     "neo-async": "^2.6.2",
+    "vue-axios": "^3.4.1",
     "vue-router": "^4.0.13"
   },
   "devDependencies": {

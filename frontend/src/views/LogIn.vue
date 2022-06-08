@@ -1,5 +1,20 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="content">
+    <auth-header></auth-header>
+    <h1>page login</h1>
   </div>
 </template>
+
+<script>
+import AuthHeader from '../components/AuthHeader.vue';
+
+export default {
+  components: {
+    'auth-header': AuthHeader,
+    AuthHeader,
+  },
+  data() {
+    return {};
+  },
+};
+</script>
