@@ -1,11 +1,11 @@
 {
   "dependencies": {
     "neo-async": "^2.6.2",
-    "node-sass": "^7.0.1",
-    "sass-loader": "^13.0.0",
     "vue-router": "^4.0.13"
   },
   "devDependencies": {
-    "@vue/cli-plugin-router": "~5.0.0"
+    "@vue/cli-plugin-router": "~5.0.0",
+    "node-sass": "^7.0.1",
+    "sass-loader": "^13.0.0"
   }
 }
