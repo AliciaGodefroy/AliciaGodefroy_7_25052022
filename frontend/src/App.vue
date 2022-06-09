@@ -9,6 +9,14 @@ export default {
   function() {
     return {};
   },
+  mounted() {
+    this.maFonction();
+  },
+  methods: {
+    maFonction() {
+      console.log('test2');
+    },
+  },
 };
 </script>
 

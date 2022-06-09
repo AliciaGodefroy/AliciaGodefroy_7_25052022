@@ -19,5 +19,6 @@ module.exports = {
         "some": [ "nesting", "id"  ]
       }
     }],
+    'import/no-extraneous-dependencies': 'error',
   },
 };

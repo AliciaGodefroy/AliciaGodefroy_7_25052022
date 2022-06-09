@@ -3,12 +3,14 @@
     <form class="form" action="/ma-page-de-traitement" method="post">
       <div>
           <label htmlFor="mail">Adresse email
-            <input type="email" id="email" name="user_mail" v-model="email">
+            <input type="email" id="email" name="user_mail" v-model="email"
+            placeholder="Entrez votre adresse email">
           </label>
       </div>
       <div>
           <label htmlFor="password">Mot de passe
-            <input type="password" id="password" name="user_password" v-model="password">
+            <input type="password" id="password" name="user_password" v-model="password"
+            placeholder="Entrez votre mot de passe">
           </label>
       </div>
       <button type="submit" class="form__button">Se connecter</button>
@@ -21,6 +23,8 @@
 $color-primary : #FD2D01;
 $color-secondary : #FFD7D7;
 $color-tertiary : #4E5166;
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:wght@400;500&family=Shrikhand&display=swap');
 
 .form-content {
   background-color: white;
