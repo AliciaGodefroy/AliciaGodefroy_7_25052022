@@ -7,6 +7,7 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-router": "~5.0.0",
+    "eslint-plugin-vuejs-accessibility": "^1.2.0",
     "node-sass": "^7.0.1",
     "sass-loader": "^13.0.0"
   }

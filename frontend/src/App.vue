@@ -24,7 +24,7 @@ export default {
 }
 
 body {
-  background-color: rgba(253, 45, 1, 0.6);
+  // background-color: rgba(253, 45, 1, 0.6);
   background-image:url('assets/image_de_fond.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;

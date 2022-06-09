@@ -31,7 +31,7 @@ nav a {
   font-weight: bold;
   color: #FFFF;
   text-decoration: none;
-  padding: 10px 20px;
+  padding: 10px 40px;
 }
 
 nav a.router-link-exact-active {
