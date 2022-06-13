@@ -13,10 +13,56 @@
             placeholder="Entrez votre mot de passe">
           </label>
       </div>
-      <button type="submit" class="form__button">Se connecter</button>
+      <div v-show="error" class="error">{{ errorMsg }}</div>
+      <button @click.prevent="userLogIn()" type="submit" class="form__button">Se connecter</button>
     </form>
   </div>
 </template>
+
+<script>
+import Axios from 'axios';
+
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+      error: false,
+      errorMsg: '',
+    };
+  },
+  methods: {
+    userLogIn() {
+      if (this.email === '' || this.password === '') {
+        this.error = true; // Si l'un des champs est vide : erreur
+        this.errorMsg = 'Merci de renseigner tous les champs.';
+      } else {
+        this.error = false;
+        this.errorMsg = '';
+        Axios
+          .post('http://localhost:3000/api/auth/login', {
+            email: this.email,
+            password: this.password,
+          })
+          .then((response) => {
+            sessionStorage.setItem('token', response.data.token);
+            sessionStorage.setItem('userId', response.data.userId);
+            sessionStorage.setItem('Pseudo', response.data.pseudo);
+            sessionStorage.setItem('Email', response.data.email);
+            sessionStorage.setItem('role', response.data.role);
+            console.log(response.data);
+            this.$router.push('/home');
+          })
+          .catch((error) => {
+            this.loading = false;
+            this.error = true;
+            this.errorMsg = error.response.data.error;
+          });
+      }
+    },
+  },
+};
+</script>
 
 <style lang='scss' scoped>
 
