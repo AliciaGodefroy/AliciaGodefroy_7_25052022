@@ -45,12 +45,10 @@ export default {
             password: this.password,
           })
           .then((response) => {
-            sessionStorage.setItem('token', response.data.token);
-            sessionStorage.setItem('userId', response.data.userId);
-            sessionStorage.setItem('Pseudo', response.data.pseudo);
-            sessionStorage.setItem('Email', response.data.email);
-            sessionStorage.setItem('role', response.data.role);
-            console.log(response.data);
+            if (response.data.token) {
+              // On ajoute le token au LocalStorage
+              localStorage.setItem('user', JSON.stringify(response.data));
+            }
             this.$router.push('/home');
           })
           .catch((error) => {

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import SignUp from '../views/SignUp.vue';
 import LogIn from '../views/LogIn.vue';
 import HomePage from '../views/HomePage.vue';
+import CreatePost from '../views/CreatePost.vue';
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,12 @@ const routes = [
     name: 'Accueil',
     component: HomePage,
     meta: { title: 'Groupomania - Accueil' },
+  },
+  {
+    path: '/publish',
+    name: 'Create Post',
+    component: CreatePost,
+    meta: { title: 'Groupomania - Publier' },
   },
 ];
 

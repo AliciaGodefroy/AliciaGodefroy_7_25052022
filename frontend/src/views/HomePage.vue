@@ -3,7 +3,9 @@
     <home-header></home-header>
     <div class="headerbis">
       <h3>Dernières publications</h3>
-      <button>+ Publier</button>
+      <router-link to="/publish">
+        <button>+ Publier</button>
+      </router-link>
     </div>
     <post-card></post-card>
   </div>
