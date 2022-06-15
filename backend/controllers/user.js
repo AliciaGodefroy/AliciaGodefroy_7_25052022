@@ -19,7 +19,8 @@ exports.signup = (req, res, next) => {
       const user = new User({
         pseudo: req.body.pseudo,
         email: emailCryptoJs,
-        password: hash
+        password: hash, 
+        isAdmin: false,
       });
       user.save()
         .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
@@ -48,7 +49,8 @@ exports.login = (req, res, next) => {
               { userId: user._id },
               process.env.SECRET_TOKEN,
               { expiresIn: '24h' }
-            )
+            ),
+            isAdmin: user.isAdmin,
           });
         })
         .catch(error => res.status(500).json({ error }));

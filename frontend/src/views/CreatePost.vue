@@ -25,7 +25,9 @@
       <button id="add-file-button" @click="$refs.fileInput.click()">
         + Ajouter une image
       </button>
-      {{ selectedFile.name }}
+      <div class="selected-file-name">
+        {{ selectedFile.name }}
+      </div>
     </div>
     <div id="form-validate-button">
         <button
@@ -97,6 +99,7 @@ h3{
   color: #FD2D01;
   display: flex;
   align-items: flex-start;
+  margin: 20px 10px;
 }
 
 .post{
@@ -104,7 +107,8 @@ h3{
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin: 20px 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   textarea{
     margin: 20px 20px 10px 20px;
     border-radius: 10px;
@@ -133,6 +137,11 @@ button{
   border-radius: 5px;
   height: 30px;
   width: 100px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.selected-file-name{
+  margin-bottom: 10px;
 }
 
 </style>
