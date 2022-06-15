@@ -3,6 +3,7 @@
     <home-header></home-header>
     <h3>Ajouter une publication</h3>
     <div class="post">
+      <div class="post__question"> Quoi de neuf, {{ pseudo }} ?</div>
       <textarea
         aria-label="titre de la publication"
         type="title"
@@ -52,6 +53,7 @@ export default {
   },
   data() {
     return {
+      pseudo: '',
       text: '',
       selectedFile: '',
       isDisabled: true,
@@ -69,7 +71,7 @@ export default {
       myForm.append('text', this.text);
       myForm.append('imageUrl', this.selectedFile);
       Axios
-        .post('http://localhost:3000/api/post', myForm, header)
+        .post('http://localhost:3000/api/post/', myForm, header)
         .then(() => {
           // eslint-disable-next-line no-restricted-globals
           this.$router.push('/home');
@@ -109,6 +111,12 @@ h3{
   flex-direction: column;
   margin: 20px 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  &__question{
+    font-family: Lato, sans-serif;
+    font-weight: 700;
+    color: #FD2D01;
+    margin-top: 10px;
+  }
   textarea{
     margin: 20px 20px 10px 20px;
     border-radius: 10px;

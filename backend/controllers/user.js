@@ -51,6 +51,7 @@ exports.login = (req, res, next) => {
               { expiresIn: '24h' }
             ),
             isAdmin: user.isAdmin,
+            pseudo: user._pseudo,
           });
         })
         .catch(error => res.status(500).json({ error }));
