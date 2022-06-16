@@ -60,9 +60,11 @@ export default {
             password: this.password,
           }) // header entre l'accolade et la parenthèse
           .then((response) => {
+            // eslint-disable-next-line no-console
             console.log(response.data.message);
-            this.$router.push('/home');
+            this.$router.push('/login');
           }).catch((err) => {
+            // eslint-disable-next-line no-console
             console.log(err.response.data.message);
           });
       }

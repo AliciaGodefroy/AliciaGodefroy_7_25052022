@@ -59,8 +59,14 @@ export default {
       isDisabled: true,
     };
   },
-  mounted() {},
+  mounted() {
+    this.getPseudo();
+  },
   methods: {
+    getPseudo() { // On récupère le pseudo depuis le localStorage
+      const user = JSON.parse(localStorage.getItem('user'));
+      this.pseudo = user.pseudo;
+    },
     createPost() {
       const user = JSON.parse(localStorage.getItem('user'));
       const myForm = new FormData();
@@ -69,13 +75,14 @@ export default {
       const header = { headers: { Authorization: 'Bearer ' + AccessToken } };
       myForm.append('userId', user.userId);
       myForm.append('text', this.text);
-      myForm.append('imageUrl', this.selectedFile);
+      myForm.append('image', this.selectedFile);
       Axios
         .post('http://localhost:3000/api/post/', myForm, header)
         .then(() => {
           // eslint-disable-next-line no-restricted-globals
           this.$router.push('/home');
         })
+        // eslint-disable-next-line no-console
         .catch((error) => console.log(error));
     },
     onFileSelected(event) {

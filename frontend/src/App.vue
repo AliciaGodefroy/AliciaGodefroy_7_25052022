@@ -14,7 +14,6 @@ export default {
   },
   methods: {
     maFonction() {
-      console.log('test2');
     },
   },
 };

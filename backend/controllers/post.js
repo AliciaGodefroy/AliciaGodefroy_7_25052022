@@ -9,7 +9,7 @@ const fs = require('fs');
 
 //Pour créer un objet
 exports.createPost = (req, res, next) => {
-  const postObject = JSON.parse(req.body.post);
+  const postObject = { ...req.body };
   delete postObject._id;
   const post = new Post({
     ...postObject,
