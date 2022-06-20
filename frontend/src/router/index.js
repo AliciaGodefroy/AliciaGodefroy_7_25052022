@@ -4,6 +4,7 @@ import SignUp from '../views/SignUp.vue';
 import LogIn from '../views/LogIn.vue';
 import HomePage from '../views/HomePage.vue';
 import CreatePost from '../views/CreatePost.vue';
+import EditPost from '../views/EditPost.vue';
 
 Vue.use(VueRouter);
 
@@ -31,6 +32,14 @@ const routes = [
     name: 'Create Post',
     component: CreatePost,
     meta: { title: 'Groupomania - Publier' },
+  },
+  {
+    path: '/post/edit/:id',
+    name: 'EditPost',
+    component: EditPost,
+    meta: {
+      title: 'Groupomania - Modifier',
+    },
   },
 ];
 

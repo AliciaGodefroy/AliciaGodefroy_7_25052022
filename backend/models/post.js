@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 //Création d'un schéma de données avec les informations d'on chaque objet aura besoin
 const postSchema = mongoose.Schema({
   userId: { type: String, required: true },
-  message: { type: String, trim: true, maxlenght: 500 },
+  text: { type: String, trim: true, maxlenght: 500 },
   imageUrl: { type: String, required: true },
   likes: { type: Number, required: true },
   usersLiked: { type: [String], required: true },
