@@ -16,7 +16,7 @@
       <p class="card__content" v-show="post.text">{{ post.text }}</p>
       <img :src="post.imageUrl" alt= 'image publiée' class= "card__image"/>
       <footer class="card__footer">
-        <div @click="like" class="like__button">
+        <div @click="like(post)" class="like__button">
           <img src="../assets/heart-regular.svg" alt="Icon Modifier" class="card__icon heart">
           <span>0</span>
         </div>
@@ -83,9 +83,11 @@ export default {
     editPublication(post) {
       const user = JSON.parse(localStorage.getItem('user'));
       const AccessToken = user.token;
+      // eslint-disable-next-line prefer-template
+      const header = { headers: { Authorization: 'Bearer ' + AccessToken } };
       Axios
         // eslint-disable-next-line prefer-template
-        .get('http://localhost:3000/api/post/' + post._id, { headers: { Authorization: 'Bearer ' + AccessToken } })
+        .get('http://localhost:3000/api/post/' + post._id, header)
         .then((res) => {
           console.log('This is the res from get message/id');
           console.log(res);
@@ -101,9 +103,11 @@ export default {
     deletePost(post) {
       const user = JSON.parse(localStorage.getItem('user'));
       const AccessToken = user.token;
+      // eslint-disable-next-line prefer-template
+      const header = { headers: { Authorization: 'Bearer ' + AccessToken } };
       Axios
         // eslint-disable-next-line prefer-template
-        .delete('http://localhost:3000/api/post/' + post._id, { headers: { Authorization: 'Bearer ' + AccessToken } })
+        .delete('http://localhost:3000/api/post/' + post._id, header)
         .then((response) => {
           console.log('this is response from deletePost');
           console.log(response.data.post);
@@ -116,6 +120,16 @@ export default {
           console.log('this is error from deletePost');
           console.log(err);
         });
+    },
+    // Liker une publication
+    like(post) {
+      const user = JSON.parse(localStorage.getItem('user'));
+      const AccessToken = user.token;
+      // eslint-disable-next-line prefer-template
+      const header = { headers: { Authorization: 'Bearer ' + AccessToken } };
+      Axios
+        // eslint-disable-next-line prefer-template
+        .post('http://localhost:3000/api/post/' + post._id + '/like', header);
     },
   },
 };

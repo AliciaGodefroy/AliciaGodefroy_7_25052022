@@ -32,7 +32,8 @@ export default {
 
 body {
   // background-color: rgba(253, 45, 1, 0.6);
-  background-image:url('assets/image_de_fond.jpg');
+  background-image:linear-gradient(to bottom, rgba(253, 45, 1, 0.6), rgba(253, 45, 1, 0.6)),
+  url('assets/image_de_fond.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;

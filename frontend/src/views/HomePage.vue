@@ -35,14 +35,14 @@ export default {
   justify-content: space-between;
   margin: 20px 10px;
   h3{
-    color: #FD2D01;
+    color: white;
   }
   button{
-    background-color: #FD2D01;
+    background-color: white;
     font-family: Lato, Helvetica, Arial, sans-serif;
     font-weight: 800;
-    border: #FD2D01;
-    color: white;
+    border: white;
+    color: #FD2D01;
     border-radius: 5px;
     height: 30px;
     width: 100px;

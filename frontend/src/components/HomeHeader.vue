@@ -1,8 +1,11 @@
 <template>
 <div>
   <header class="header">
-    <img src="../assets/icon-left-font-monochrome-white.png" alt="Logo Groupomania"
-    class="header__logo">
+    <router-link to="/home">
+      <img src="../assets/icon-left-font.png" alt="Logo Groupomania"
+      class="header__logo">
+    </router-link>
+    <font-awesome-icon icon="fa-solid fa-user" />
   </header>
 </div>
 </template>
@@ -12,7 +15,7 @@
 .header{
   display: flex;
   justify-content: flex-start;
-  background-color: #FD2D01;
+  background-color: white;
   border-radius: 0px 0px 10px 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   &__logo{

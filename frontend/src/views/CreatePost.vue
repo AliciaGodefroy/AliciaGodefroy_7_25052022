@@ -32,6 +32,7 @@
     </div>
     <div id="form-validate-button">
         <button
+          class="form-validate-button"
           id="form-validate-button"
           @click="createPost"
           type="submit"
@@ -105,7 +106,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:wght@400;500&family=Shrikhand&display=swap');
 
 h3{
-  color: #FD2D01;
+  color: white;
   display: flex;
   align-items: flex-start;
   margin: 20px 10px;
@@ -139,23 +140,25 @@ h3{
     margin: 10px 20px 20px 20px;
     color: white;
     background-color: #FD2D01;
-  }
-  #form-validate-button{
-    margin: 10px;
+    border: #FD2D01;
   }
 }
 
 button{
-  background-color: #FD2D01;
   font-family: Lato, Helvetica, Arial, sans-serif;
   font-weight: 800;
-  border: #FD2D01;
-  color: white;
   border-radius: 5px;
   height: 30px;
   width: 100px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
+.form-validate-button{
+    margin: 10px;
+    background-color: white;
+    border: white;
+    color: #FD2D01;
+  }
 
 .selected-file-name{
   margin-bottom: 10px;
