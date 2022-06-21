@@ -20,5 +20,6 @@ module.exports = {
       }
     }],
     'import/no-extraneous-dependencies': 'error',
+    'no-underscore-dangle':  ['error', { 'allow': ['_id'] }],
   },
 };

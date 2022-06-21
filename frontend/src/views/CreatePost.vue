@@ -130,6 +130,8 @@ h3{
     font-family: Lato, sans-serif;
     font-weight: 800;
     color: black;
+    padding: 10px;
+    text-align: left;
   }
   #add-file-button{
     width: 159px;

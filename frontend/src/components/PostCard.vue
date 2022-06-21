@@ -72,7 +72,7 @@ export default {
       const AccessToken = user.token;
       Axios
         // eslint-disable-next-line prefer-template
-        .get('http://localhost:3000/api/post/' + post.id, { headers: { Authorization: 'Bearer ' + AccessToken } })
+        .get('http://localhost:3000/api/post/' + post._id, { headers: { Authorization: 'Bearer ' + AccessToken } })
         .then((res) => {
           console.log('This is the res from get message/id');
           console.log(res);
@@ -90,10 +90,10 @@ export default {
       const AccessToken = user.token;
       Axios
         // eslint-disable-next-line prefer-template
-        .delete('http://localhost:3000/api/post/' + post.id, { headers: { Authorization: 'Bearer ' + AccessToken } })
+        .delete('http://localhost:3000/api/post/' + post._id, { headers: { Authorization: 'Bearer ' + AccessToken } })
         .then((response) => {
           console.log('this is response from deletePost');
-          console.log(response.data.message);
+          console.log(response.data.post);
         })
         // On refait un get derrière pour MAJ
         .then(() => {
