@@ -21,5 +21,6 @@ module.exports = {
     }],
     'import/no-extraneous-dependencies': 'error',
     'no-underscore-dangle':  ['error', { 'allow': ['_id'] }],
+    'vuejs-accessibility/click-events-have-key-events': 'off',
   },
 };

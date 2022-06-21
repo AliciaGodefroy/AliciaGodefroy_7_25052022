@@ -18,14 +18,3 @@ export default {
   },
 };
 </script>
-
-<style land="scss" scoped>
-
-body {
-  background-image:url('../assets/image_de_fond.jpg');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-}
-
-</style>

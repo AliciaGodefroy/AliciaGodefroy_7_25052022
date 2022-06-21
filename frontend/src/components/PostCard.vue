@@ -3,8 +3,10 @@
     <article class="card" v-for="post in posts" :key="post._id">
       <header class="card__header">
         <p class="card__pseudo">{{ pseudo }}</p>
-        <div class="icons">
-          <a class="link" :href="'/publication/edit/' + post._id">
+        <!-- Si l'utilisateur est admin ou si le userId correpsondant à l'UserId
+        de la publication alors on affiche l'icone modifier -->
+        <div class="icons" v-if="userId == post.userId || isAdmin == true">
+          <a class="link" :href="'/post/edit/' + post._id">
             <img src="../assets/pen-to-square-solid.svg" alt="Icon Modifier" class="card__icon">
           </a>
           <img src="../assets/trash-can-solid.svg" alt="Icon Supprimer"
@@ -14,9 +16,10 @@
       <p class="card__content" v-show="post.text">{{ post.text }}</p>
       <img :src="post.imageUrl" alt= 'image publiée' class= "card__image"/>
       <footer class="card__footer">
-        <a class="link" :href="'/publication/edit/' + post._id">
+        <div @click="like" class="like__button">
           <img src="../assets/heart-regular.svg" alt="Icon Modifier" class="card__icon heart">
-        </a>
+          <span>0</span>
+        </div>
       </footer>
     </article>
   </div>
@@ -30,6 +33,8 @@ export default {
   // eslint-disable-next-line object-shorthand
   data: function () {
     return {
+      userId: '',
+      isAdmin: '',
       pseudo: '',
       posts: '',
     };
@@ -37,14 +42,22 @@ export default {
   mounted() {
     this.getPseudo();
     this.getAllPosts();
-    this.userId = localStorage.getItem('userId');
-    this.isAdmin = localStorage.getItem('isAdmin');
+    this.getUserId();
+    this.getIsAdmin();
   },
   methods: {
     // Récupérer le pseudo de l'utilisateur depuis le localStorage
     getPseudo() {
       const user = JSON.parse(localStorage.getItem('user'));
       this.pseudo = user.pseudo;
+    },
+    getUserId() {
+      const user = JSON.parse(localStorage.getItem('user'));
+      this.userId = user.userId;
+    },
+    getIsAdmin() {
+      const user = JSON.parse(localStorage.getItem('user'));
+      this.isAdmin = user.isAdmin;
     },
     // Afficher tous les posts
     getAllPosts() {
@@ -117,7 +130,8 @@ export default {
   color: black;
   border-radius: 10px;
   font-family: Lato, sans-serif;
-  margin-bottom: 15px;
+  margin: 20px 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   &__header{
     display: flex;
     align-items: flex-end;
@@ -135,12 +149,14 @@ export default {
     margin: 0;
     padding: 0 10px;
     display: flex;
+    text-align: left;
   }
   &__image{
     padding: 10px;
     object-fit: cover;
     object-position: center;
     width: 95%;
+    height: 200px;
     border-radius: 30px;
   }
   &__icon{
@@ -156,5 +172,10 @@ export default {
   .heart{
     margin-bottom: 10px;
   }
+}
+
+.like__button{
+  display: flex;
+  align-items: center;
 }
 </style>
