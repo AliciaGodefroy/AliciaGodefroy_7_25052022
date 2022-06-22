@@ -46,8 +46,15 @@ export default {
           })
           .then((response) => {
             if (response.data.token) {
+              const infoUser = {
+                pseudo: response.data.pseudo,
+                token: response.data.token,
+                userId: response.data.userId,
+              };
               // On ajoute le token au LocalStorage
-              localStorage.setItem('user', JSON.stringify(response.data));
+              console.log('infoUser', infoUser);
+              localStorage.setItem('user', JSON.stringify(infoUser));
+              this.$store.dispatch('setRole', response.data.isAdmin);
             }
             this.$router.push('/home');
           })

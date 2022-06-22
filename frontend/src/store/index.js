@@ -9,16 +9,19 @@ export default new Vuex.Store({
   },
   getters: {
     isAdmin(state) {
+      console.log('je veux connaitre son role');
       return state.admin;
     },
   },
   mutations: {
-    SET_ROLE(state, role) {
-      state.role = role;
+    SET_ROLE(state, userRole) {
+      state.admin = userRole;
+      console.log('after MUTATION', state.admin);
     },
   },
   actions: {
     setRole({ commit }, userRole) {
+      console.log('userRole', userRole);
       commit('SET_ROLE', userRole);
     },
   },

@@ -20,6 +20,9 @@ export default {
     'home-header': HomeHeader,
     'post-card': PostCard,
   },
+  mounted() {
+    console.log('admin ?', this.$store.getters.isAdmin);
+  },
   data() {
     return {};
   },

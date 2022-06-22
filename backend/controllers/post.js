@@ -2,8 +2,7 @@ const jwt = require('jsonwebtoken');
 const dotenv = require("dotenv");
 dotenv.config();
 
-// LOGIQUE METIER
-
+const User = require('../models/user');
 const Post = require ('../models/post');
 const fs = require('fs');
 
@@ -29,13 +28,21 @@ exports.modifyPost = (req, res, next) => {
   const decodedToken = jwt.verify(token, process.env.SECRET_TOKEN);
   const decodedUserId = decodedToken.userId;
   Post.findOne({ _id: req.params.id }).then((data)=>{
+    // Faire une requete supplémentaire sur la table user pour récupérer les infos
+    // de l'user (dont isAdmin). Pour ce faire il faut passer en paramètre l'userId qu'on a récupéré
+    // un peu plus haut (decodedUserId)
+    // exemple => const user = User.findOne()...
+    // const user = User.findOne({
+    //   isAdmin: req.params.isAdmin,
+    // })
+    console.log('decodedUserId', decodedUserId)
     // On compare l'userId de la sauce avec l'userId du Token
-    if (data.userId == decodedUserId) {
+    if (data.userId == decodedUserId /*|| user.isAdmin == true*/) {
       console.log('data.userId', data.userId)
       console.log('decodedUserId', decodedUserId)
       const postObject = req.file ?
         {
-          ...JSON.parse(req.body.post),
+          // ...JSON.parse(req.body.post),
           imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
         } : { ...req.body };
       Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
@@ -96,6 +103,8 @@ exports.getOnePost = (req, res, next) => { //.get et non .use pour indiquer que 
 exports.getAllPosts = (req, res, next) => {
     Post.find().then(
       (posts) => {
+        // varSort = { $sort : {"_id":-1} };
+        // db.posts.aggregate( [ varSort ] );
         res.status(200).json(posts); //On récupère le tableau de tous les things retournés par la base
       }
     ).catch(
@@ -107,7 +116,7 @@ exports.getAllPosts = (req, res, next) => {
     );
 }
 
-// Pour ajouter/retirer un like ou un dislike
+// Pour ajouter/retirer un like 
 exports.likePost = (req, res, next) => {
   let like = req.body.like // On récupère le nombre de likes
   let userId = req.body.userId // On récupère l'userId
@@ -125,17 +134,17 @@ exports.likePost = (req, res, next) => {
             
       break;
 
-    case 0 : // Pour retirer un like 
-        Post.findOne({ _id: postId })
-           .then((post) => {
-            if (post.usersLiked.includes(userId)) { 
-              Post.updateOne({ _id: postId }, { $pull: { usersLiked: userId }, $inc: { likes: -1 }})
-                .then(() => res.status(200).json({ message: `Neutre` }))
-                .catch((error) => res.status(400).json({ error }))
-            }
-          })
-          .catch((error) => res.status(404).json({ error }))
-      break;
+    // case 0 : // Pour retirer un like 
+    //     Post.findOne({ _id: postId })
+    //        .then((post) => {
+    //         if (post.usersLiked.includes(userId)) { 
+    //           Post.updateOne({ _id: postId }, { $pull: { usersLiked: userId }, $inc: { likes: -1 }})
+    //             .then(() => res.status(200).json({ message: `Neutre` }))
+    //             .catch((error) => res.status(400).json({ error }))
+    //         }
+    //       })
+    //       .catch((error) => res.status(404).json({ error }))
+    //   break;
       
       default:
         console.log(error);

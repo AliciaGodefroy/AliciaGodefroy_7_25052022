@@ -7,8 +7,7 @@
     </router-link>
     <button id="logout-button"
     class="header__button"
-    @click.prevent="handleLogout"
-    :disabled="isLoggedOut">
+    @click.prevent="Logout()">
       <font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket" />
     </button>
     <modal-type v-if="showModal" @close="showModal = false">
@@ -19,14 +18,13 @@
 </template>
 
 <script>
+// import Axios from 'axios';
 import Vue from 'vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-import Userfront from '@userfront/core';
 import ModalType from './ModalType.vue';
 
-Userfront.init('demo1234');
 library.add(faArrowRightFromBracket);
 Vue.config.productionTip = false;
 
@@ -42,33 +40,18 @@ export default {
     };
   },
   methods: {
-    handleLogout() {
-      Userfront.logout();
-    },
-  },
-  computed: {
-    // User is logged out if they don't have an access token
-    isLoggedOut() {
-      return !Userfront.tokens.AccessToken;
+    Logout() {
+      localStorage.clear();
+      this.$router.push('/login');
     },
   },
 };
-
-// library.add(faUser);
-// Vue.config.productionTip = false;
-
-// export default {
-//   components: {
-//     'font-awesome-icon': FontAwesomeIcon,
-//   },
-// };
 </script>
 
 <style lang="scss" scoped>
 
 .header{
   display: flex;
-  // justify-content: flex-start;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;

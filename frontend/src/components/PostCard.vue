@@ -5,7 +5,7 @@
         <p class="card__pseudo">{{ pseudo }}</p>
         <!-- Si l'utilisateur est admin ou si le userId correpsondant à l'UserId
         de la publication alors on affiche l'icone modifier -->
-        <div class="icons" v-if="userId == post.userId || isAdmin == true">
+        <div class="icons" v-if="userId == post.userId || isAdmin">
           <a class="link" :href="'/post/edit/' + post._id">
             <span>D</span>
             <font-awesome-icon icon="fa-solid fa-pen-to-square" class="card__icon1"/>
@@ -66,8 +66,7 @@ export default {
       this.userId = user.userId;
     },
     getIsAdmin() {
-      const user = JSON.parse(localStorage.getItem('user'));
-      this.isAdmin = user.isAdmin;
+      this.isAdmin = this.$store.getters.isAdmin;
     },
     // Afficher tous les posts
     getAllPosts() {
@@ -139,7 +138,19 @@ export default {
       const header = { headers: { Authorization: 'Bearer ' + AccessToken } };
       Axios
         // eslint-disable-next-line prefer-template
-        .post('http://localhost:3000/api/post/' + post._id + '/like', header);
+        .post('http://localhost:3000/api/post/' + post._id + '/like', header)
+        .then((response) => {
+          // eslint-disable-next-line padded-blocks
+          console.log('this is response from like', response);
+        })
+        // On refait un get derrière pour MAJ
+        .then(() => {
+          this.getAllPosts();
+        })
+        .catch((err) => {
+          console.log('this is error from like');
+          console.log(err);
+        });
     },
   },
 };
