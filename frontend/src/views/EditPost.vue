@@ -17,7 +17,9 @@
           alt="picture" />
         </section>
         <footer class="edit__footer">
-          <button @click="updatePost">Modifier</button>
+          <button @click="updatePost">
+            Modifier
+          </button>
         </footer>
       </div>
     </div>
@@ -44,8 +46,18 @@ export default {
   },
   mounted() {
     this.userId = localStorage.getItem('userId');
+    this.getUserId();
+    this.getIsAdmin();
   },
   methods: {
+    getUserId() {
+      const user = JSON.parse(localStorage.getItem('user'));
+      this.userId = user.userId;
+    },
+    getIsAdmin() {
+      const user = JSON.parse(localStorage.getItem('user'));
+      this.isAdmin = user.isAdmin;
+    },
     selectFile() {
       // eslint-disable-next-line prefer-destructuring
       this.file = this.$refs.file.files[0];
@@ -99,7 +111,7 @@ h3{
     width: 90%;
     border-radius: 10px;
     font-family: Lato, sans-serif;
-    font-weight: 800;
+    font-weight: 400;
     color: black;
     padding: 10px;
     text-align: left;

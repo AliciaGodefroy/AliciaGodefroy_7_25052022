@@ -7,19 +7,18 @@
         de la publication alors on affiche l'icone modifier -->
         <div class="icons" v-if="userId == post.userId || isAdmin == true">
           <a class="link" :href="'/post/edit/' + post._id">
-            <img src="../assets/pen-to-square-solid.svg" alt="Icon Modifier" class="card__icon">
+            <span>D</span>
+            <font-awesome-icon icon="fa-solid fa-pen-to-square" class="card__icon1"/>
           </a>
-          <img src="../assets/trash-can-solid.svg" alt="Icon Supprimer"
-          @click="deletePost(post)" class="card__icon" aria-hidden="true">
+          <font-awesome-icon icon="fa-solid fa-trash" @click="deletePost(post)"
+          class="card__icon2"/>
         </div>
       </header>
       <p class="card__content" v-show="post.text">{{ post.text }}</p>
       <img :src="post.imageUrl" alt= 'image publiée' class= "card__image"/>
       <footer class="card__footer">
-        <div @click="like(post)" class="like__button">
-          <img src="../assets/heart-regular.svg" alt="Icon Modifier" class="card__icon heart">
-          <span>0</span>
-        </div>
+        <font-awesome-icon icon="fa-solid fa-heart" @click="like(post)" class="card__icon3"/>
+        <span>0</span>
       </footer>
     </article>
   </div>
@@ -27,9 +26,20 @@
 
 <script>
 import Axios from 'axios';
+import Vue from 'vue';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faPenToSquare, faTrash, faHeart } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faPenToSquare, faTrash);
+library.add(faHeart);
+Vue.config.productionTip = false;
 
 export default {
   name: 'PostCard',
+  components: {
+    'font-awesome-icon': FontAwesomeIcon,
+  },
   // eslint-disable-next-line object-shorthand
   data: function () {
     return {
@@ -161,7 +171,7 @@ export default {
     font-weight: 400;
     color: black;
     margin: 0;
-    padding: 0 10px;
+    padding: 8px 10px;
     display: flex;
     text-align: left;
   }
@@ -173,12 +183,9 @@ export default {
     height: 200px;
     border-radius: 30px;
   }
-  &__icon{
-    height: 20px;
-    padding: 10px 10px 0 10px;
-  }
   &__footer{
     display: flex;
+    align-items: center;
   }
   .icons{
     display: flex;
@@ -186,6 +193,30 @@ export default {
   .heart{
     margin-bottom: 10px;
   }
+}
+
+.link{
+  span{
+    display: none;
+  }
+}
+
+.card__icon1{
+  height: 20px;
+  padding: 10px 5px 0 10px;
+  color: black;
+}
+
+.card__icon2{
+  height: 20px;
+  padding: 10px 10px 0 5px;
+  color: black;
+}
+
+.card__icon3{
+  height: 20px;
+  padding: 10px;
+  color: black;
 }
 
 .like__button{
