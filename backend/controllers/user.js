@@ -58,12 +58,3 @@ exports.login = (req, res, next) => {
     })
     .catch(error => res.status(500).json({ error }));
 };
-
-// Pour la déconnexion
-exports.logout = (req, res, next) => {
-  console.log('User Id', req.user._id);
-  User.findByIdAndRemove(req.user._id, function(err){
-  if(err) res.send(err);
-  res.json({ message: 'User logged out!'});
-  })
-};

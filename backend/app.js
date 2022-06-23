@@ -19,7 +19,7 @@ mongoose.connect(process.env.SECRET_DB,
 
 const app = express();
 
-// Mesure de sécurité avec express-rate-limite
+//Mesure de sécurité avec express-rate-limite
 const limiter = rateLimit({
   windowMS: 15 * 60 * 1000, // Fenêtre de 15min
   max: 20, // on limite chaque adresse IP à 20 appels (requests) par fenêtre de 15min

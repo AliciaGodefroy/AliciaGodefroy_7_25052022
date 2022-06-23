@@ -1,18 +1,17 @@
 <template>
 <div>
-  <header class="header">
-    <router-link to="/home">
-      <img src="../assets/icon-left-font.png" alt="Logo Groupomania"
-      class="header__logo">
-    </router-link>
-    <button id="logout-button"
-    class="header__button"
-    @click.prevent="Logout()">
-      <font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket" />
-    </button>
-    <modal-type v-if="showModal" @close="showModal = false">
-      <button><font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket" /></button>
-    </modal-type>
+  <header>
+    <div class="header">
+      <router-link to="/home">
+        <img src="../assets/icon-left-font.png" alt="Logo Groupomania"
+        class="header__logo">
+      </router-link>
+      <button id="logout-button"
+       class="header__button"
+      @click.prevent="Logout()">
+        <font-awesome-icon icon="fa-solid fa-right-from-bracket" size="lg" />
+      </button>
+    </div>
   </header>
 </div>
 </template>
@@ -22,15 +21,13 @@
 import Vue from 'vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-import ModalType from './ModalType.vue';
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faArrowRightFromBracket);
+library.add(faRightFromBracket);
 Vue.config.productionTip = false;
 
 export default {
   components: {
-    'modal-type': ModalType,
     'font-awesome-icon': FontAwesomeIcon,
   },
   // eslint-disable-next-line object-shorthand
@@ -50,14 +47,31 @@ export default {
 
 <style lang="scss" scoped>
 
+header{
+  background-color: white;
+  border-radius: 0px 0px 10px 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  @media screen and (min-width: 1025px) {
+    justify-content: center;
+    display: flex;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px){
+    justify-content: center;
+    display: flex;
+  }
+}
+
 .header{
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: white;
-  border-radius: 0px 0px 10px 10px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  @media screen and (min-width: 1025px) {
+    width: 50%;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px){
+    width: 50%;
+  }
   &__logo{
     width: 180px ;
     margin: 10px;
