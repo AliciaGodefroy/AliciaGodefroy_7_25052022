@@ -50,13 +50,14 @@ export default {
     this.getIsAdmin();
   },
   methods: {
+    // On récupère l'userId stocké dans le localStorage
     getUserId() {
       const user = JSON.parse(localStorage.getItem('user'));
       this.userId = user.userId;
     },
+    // On récupère le rôle stocké dans le Store Vuex
     getIsAdmin() {
-      const user = JSON.parse(localStorage.getItem('user'));
-      this.isAdmin = user.isAdmin;
+      this.isAdmin = this.$store.getters.isAdmin;
     },
     selectFile() {
       // eslint-disable-next-line prefer-destructuring

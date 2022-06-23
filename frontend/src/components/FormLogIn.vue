@@ -51,9 +51,9 @@ export default {
                 token: response.data.token,
                 userId: response.data.userId,
               };
-              // On ajoute le token au LocalStorage
-              console.log('infoUser', infoUser);
+              // On ajoute les infos de l'User au LocalStorage
               localStorage.setItem('user', JSON.stringify(infoUser));
+              // On ajoute le rôle de l'User au Store Vuex
               this.$store.dispatch('setRole', response.data.isAdmin);
             }
             this.$router.push('/home');

@@ -2,7 +2,7 @@
   <div class="container">
     <article class="card" v-for="post in posts" :key="post._id">
       <header class="card__header">
-        <p class="card__pseudo">{{ pseudo }}</p>
+        <p class="card__pseudo">{{ post.pseudo }}</p>
         <!-- Si l'utilisateur est admin ou si le userId correpsondant à l'UserId
         de la publication alors on affiche l'icone modifier -->
         <div class="icons" v-if="userId == post.userId || isAdmin">
@@ -17,8 +17,9 @@
       <p class="card__content" v-show="post.text">{{ post.text }}</p>
       <img :src="post.imageUrl" alt= 'image publiée' class= "card__image"/>
       <footer class="card__footer">
-        <font-awesome-icon icon="fa-solid fa-heart" @click="like(post)" class="card__icon3"/>
-        <span>0</span>
+        <font-awesome-icon icon="fa-solid fa-heart" v-if="!liked"
+        @click="likePost(post)" class="card__icon3"/>
+        <span>{{likes.length}}</span>
       </footer>
     </article>
   </div>
@@ -47,6 +48,7 @@ export default {
       isAdmin: '',
       pseudo: '',
       posts: '',
+      likes: [],
     };
   },
   mounted() {
@@ -61,10 +63,12 @@ export default {
       const user = JSON.parse(localStorage.getItem('user'));
       this.pseudo = user.pseudo;
     },
+    // On récupère l'userId stocké dans le localStorage
     getUserId() {
       const user = JSON.parse(localStorage.getItem('user'));
       this.userId = user.userId;
     },
+    // On récupère le rôle stocké dans le Store Vuex
     getIsAdmin() {
       this.isAdmin = this.$store.getters.isAdmin;
     },
@@ -130,8 +134,18 @@ export default {
           console.log(err);
         });
     },
-    // Liker une publication
-    like(post) {
+    // Vérifier si l'utilisateur à déjà liké le post
+    // async fetchLikes(post) {
+    //   // eslint-disable-next-line prefer-template
+    //   const resLikes = await fetch('http://localhost:3000/api/posts/' + post._id + '/likes');
+    //   const dataLikes = await resLikes.json();
+    //   dataLikes.forEach(like => {
+    //     like.userId === this.userId ? this.liked = true : this.like = false;
+    //   });
+    //   return dataLikes;
+    // },
+    // Liker le post
+    likePost(post) {
       const user = JSON.parse(localStorage.getItem('user'));
       const AccessToken = user.token;
       // eslint-disable-next-line prefer-template
@@ -142,10 +156,6 @@ export default {
         .then((response) => {
           // eslint-disable-next-line padded-blocks
           console.log('this is response from like', response);
-        })
-        // On refait un get derrière pour MAJ
-        .then(() => {
-          this.getAllPosts();
         })
         .catch((err) => {
           console.log('this is error from like');

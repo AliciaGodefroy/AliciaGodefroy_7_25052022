@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 const dotenv = require("dotenv");
 dotenv.config();
 
-const User = require('../models/user');
 const Post = require ('../models/post');
 const fs = require('fs');
 
@@ -32,10 +31,8 @@ exports.modifyPost = (req, res, next) => {
     // de l'user (dont isAdmin). Pour ce faire il faut passer en paramètre l'userId qu'on a récupéré
     // un peu plus haut (decodedUserId)
     // exemple => const user = User.findOne()...
-    // const user = User.findOne({
-    //   isAdmin: req.params.isAdmin,
-    // })
     console.log('decodedUserId', decodedUserId)
+    console.log('data', data)
     // On compare l'userId de la sauce avec l'userId du Token
     if (data.userId == decodedUserId /*|| user.isAdmin == true*/) {
       console.log('data.userId', data.userId)
@@ -101,10 +98,9 @@ exports.getOnePost = (req, res, next) => { //.get et non .use pour indiquer que 
 
 //Pour récupérer tous les objets 
 exports.getAllPosts = (req, res, next) => {
-    Post.find().then(
+  const sort = { _id: -1}
+    Post.find().sort(sort).then(
       (posts) => {
-        // varSort = { $sort : {"_id":-1} };
-        // db.posts.aggregate( [ varSort ] );
         res.status(200).json(posts); //On récupère le tableau de tous les things retournés par la base
       }
     ).catch(

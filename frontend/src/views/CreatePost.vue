@@ -74,6 +74,7 @@ export default {
       const AccessToken = user.token;
       // eslint-disable-next-line prefer-template
       const header = { headers: { Authorization: 'Bearer ' + AccessToken } };
+      myForm.append('pseudo', user.pseudo);
       myForm.append('userId', user.userId);
       myForm.append('text', this.text);
       myForm.append('image', this.selectedFile);
@@ -129,7 +130,7 @@ h3{
     margin: 20px 20px 10px 20px;
     border-radius: 10px;
     font-family: Lato, sans-serif;
-    font-weight: 800;
+    font-weight: 400;
     color: black;
     padding: 10px;
     text-align: left;
