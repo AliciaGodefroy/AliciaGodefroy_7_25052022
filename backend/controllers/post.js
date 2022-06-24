@@ -28,14 +28,11 @@ exports.modifyPost = (req, res, next) => {
   const decodedToken = jwt.verify(token, process.env.SECRET_TOKEN);
   const decodedUserId = decodedToken.userId;
   Post.findOne({ _id: req.params.id }).then((data)=>{
-    // Faire une requete supplémentaire sur la table user pour récupérer les infos
-    // de l'user (dont isAdmin). Pour ce faire il faut passer en paramètre l'userId qu'on a récupéré
-    // un peu plus haut (decodedUserId)
-    // exemple => const user = User.findOne()...
-    console.log('decodedUserId', decodedUserId)
-    console.log('data', data)
-    // On compare l'userId de la sauce avec l'userId du Token
-    if (data.userId == decodedUserId || user.isAdmin == true) {
+    User.findOne({
+      _id: decodedUserId
+    }).then((dataUser) => {
+      // On compare l'userId de la sauce avec l'userId du Token
+    if (data.userId == decodedUserId || dataUser.isAdmin == true) {
       console.log('data.userId', data.userId)
       console.log('decodedUserId', decodedUserId)
       const postObject = req.file ?
@@ -50,33 +47,37 @@ exports.modifyPost = (req, res, next) => {
     else {
       res.status(401).json({ message: "Vous n'avez pas la permission !"})
     }
+    }).catch(error => res.status(400).json({ error }));
   })
 };
 
 //Pour supprimer un objet
 exports.deletePost = (req, res, next) => {
-  // console.log('req.header', req.headers.authorization)
   // recuperer le token dans la chaine de string (enlever le mot bearer et l'espace)
   const token = req.headers.authorization.split(' ')[1];
   const decodedToken = jwt.verify(token, process.env.SECRET_TOKEN);
   const decodedUserId = decodedToken.userId;
   Post.findOne({ _id: req.params.id }).then((data)=>{
-    if (data.userId == decodedUserId) {
-      // console.log('data.userId', data.userId)
-      // console.log('decodedUserId', decodedUserId)
-      Post.findOne({ _id: req.params.id })
-      .then(post => {
-        const filename = post.imageUrl.split('/images/')[1];
-        fs.unlink(`images/${filename}`, () => {
-          Post.deleteOne({ _id: req.params.id })
-            .then(() => res.status(200).json({ message: 'Post supprimée !'}))
-            .catch(error => res.status(400).json({ error }));
-        });
-    })
-    .catch(error => res.status(500).json({ error }));
-    } else {
-      res.status(401).json({ message: "Vous n'avez pas la permission !"})
-    }
+    User.findOne({
+      _id: decodedUserId
+    }).then((dataUser) => {
+      if (data.userId == decodedUserId || dataUser.isAdmin == true) {
+        // console.log('data.userId', data.userId)
+        // console.log('decodedUserId', decodedUserId)
+        Post.findOne({ _id: req.params.id })
+        .then(post => {
+          const filename = post.imageUrl.split('/images/')[1];
+          fs.unlink(`images/${filename}`, () => {
+            Post.deleteOne({ _id: req.params.id })
+              .then(() => res.status(200).json({ message: 'Post supprimée !'}))
+              .catch(error => res.status(400).json({ error }));
+          });
+      })
+      .catch(error => res.status(500).json({ error }));
+      } else {
+        res.status(401).json({ message: "Vous n'avez pas la permission !"})
+      }
+    }).catch(error => res.status(400).json({ error }));
   })
 };
 
@@ -125,7 +126,7 @@ exports.likePost = (req, res, next) => {
   
   switch (like) {
     case 1 : // Pour ajouter un like 
-        Sauce.updateOne({ _id: sauceId }, { $push: { usersLiked: userId }, $inc: { likes: +1 }}) // On utilise la fonction updateOne() pour mettre à jour le like de l'userId sur la sauceId
+        Post.updateOne({ _id: sauceId }, { $push: { usersLiked: userId }, $inc: { likes: +1 }}) // On utilise la fonction updateOne() pour mettre à jour le like de l'userId sur la sauceId
           .then(() => res.status(200).json({ message: `J'aime` }))
           .catch((error) => res.status(400).json({ error }))
             

@@ -12,6 +12,7 @@
       <footer class="card__footer">
         <div class="card__footer--right">
           <font-awesome-icon icon="fa-solid fa-heart"
+          v-if="!liked"
           @click="likePost(post)" class="card__icon3"/>
           <span>{{likes.length}}</span>
         </div>
@@ -56,7 +57,7 @@ export default {
       posts: '',
       post: '',
       likes: [],
-      // liked: null,
+      liked: null,
     };
   },
   mounted() {
@@ -143,32 +144,35 @@ export default {
         });
     },
     // Vérifier si l'utilisateur à déjà liké le post
-    // async fetchLikes(post) {
-    //   // eslint-disable-next-line prefer-template
-    //   const resLikes = await fetch('http://localhost:3000/api/posts/' + post._id + '/likes');
-    //   const dataLikes = await resLikes.json();
-    //   dataLikes.forEach(like => {
-    //     like.userId === this.userId ? this.liked = true : this.like = false;
-    //   });
-    //   return dataLikes;
-    // },
+    async isLiked(post) {
+      // eslint-disable-next-line prefer-template
+      const resLikes = await Axios('http://localhost:3000/api/posts/' + post._id + '/likes');
+      const dataLikes = await resLikes.json();
+      dataLikes.forEach((like) => {
+        // eslint-disable-next-line no-unused-expressions
+        like.userId === this.userId ? this.liked = true : this.like = false;
+      });
+      return dataLikes;
+    },
     // Liker le post
     likePost(post) {
       const user = JSON.parse(localStorage.getItem('user'));
       const AccessToken = user.token;
       // eslint-disable-next-line prefer-template
       const header = { headers: { Authorization: 'Bearer ' + AccessToken } };
+      const data = {
+        like: true,
+        userId: this.userId,
+        post: post._id,
+      };
       Axios
         // eslint-disable-next-line prefer-template
-        .post('http://localhost:3000/api/post/' + post._id + '/like', header)
-        .then((response) => {
-          // eslint-disable-next-line padded-blocks
-          console.log('this is response from like', response);
-        })
-        .catch((err) => {
-          console.log('this is error from like');
-          console.log(err);
-        });
+        .post('http://localhost:3000/api/post/' + post._id + '/like', data, header)
+        .then((res) => res.json())
+        // eslint-disable-next-line no-shadow
+        .then((data) => this.likes.push(data))
+        .catch((error) => console.log(error));
+      this.liked = true; // <- on indiquer à notre template que le user à liker ce post
     },
   },
 };
