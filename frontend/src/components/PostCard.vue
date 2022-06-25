@@ -14,7 +14,7 @@
           <font-awesome-icon icon="fa-solid fa-heart"
           v-if="!liked"
           @click="likePost(post)" class="card__icon3"/>
-          <span>{{likes.length}}</span>
+          <span>{{post.likes}}</span>
         </div>
         <!-- Si l'utilisateur est admin ou si le userId correpsondant à l'UserId
         de la publication alors on affiche l'icone modifier -->
@@ -65,8 +65,13 @@ export default {
     this.getAllPosts();
     this.getUserId();
     this.getIsAdmin();
+    // this.getLikes();
   },
   methods: {
+    // // Récupérer le nombre de likes
+    // getLikes() {
+    //   this.likes = post.likes
+    // },
     // Récupérer le pseudo de l'utilisateur depuis le localStorage
     getPseudo() {
       const user = JSON.parse(localStorage.getItem('user'));
@@ -148,9 +153,9 @@ export default {
       // eslint-disable-next-line prefer-template
       const resLikes = await Axios('http://localhost:3000/api/posts/' + post._id + '/likes');
       const dataLikes = await resLikes.json();
-      dataLikes.forEach((like) => {
+      dataLikes.forEach((likes) => {
         // eslint-disable-next-line no-unused-expressions
-        like.userId === this.userId ? this.liked = true : this.like = false;
+        likes.userId === this.userId ? this.usersLiked = true : this.likes = false;
       });
       return dataLikes;
     },
@@ -161,7 +166,7 @@ export default {
       // eslint-disable-next-line prefer-template
       const header = { headers: { Authorization: 'Bearer ' + AccessToken } };
       const data = {
-        like: true,
+        likes: true,
         userId: this.userId,
         post: post._id,
       };
@@ -286,6 +291,10 @@ export default {
   height: 20px;
   padding: 10px;
   color: black;
+}
+
+.card__icon3:checked{
+  color: #FD2D01;
 }
 
 .like__button{

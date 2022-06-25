@@ -114,23 +114,34 @@ exports.getAllPosts = (req, res, next) => {
     );
 }
 
-// Pour ajouter/retirer un like 
+// Pour ajouter un like
 exports.likePost = (req, res, next) => {
-  let like = req.body.like // On récupère le nombre de likes
+  let likes = req.body.likes // On récupère le nombre de likes
   let userId = req.body.userId // On récupère l'userId
-  let sauceId = req.params.id // On récupère l'id de la sauce
+  let postId = req.params.id // On récupère l'id de la sauce
 
-  // Utilisation de la structure conditionnelle Switch/Case 
-  //(qui permet de sélectionner un ensemble d’instructions à exécuter 
-  //en fonction de la valeur d’une variable)
+  Post.updateOne({ _id: postId }, { $push: { usersLiked: userId }, $inc: { likes: +1 }}) // On utilise la fonction updateOne() pour mettre à jour le like de l'userId sur la sauceId
+    .then(() => res.status(200).json({ message: `J'aime` }))
+    .catch((error) => res.status(400).json({ error }))
+}
+
+// Pour ajouter un like 
+// exports.likePost = (req, res, next) => {
+//   let like = req.body.like // On récupère le nombre de likes
+//   let userId = req.body.userId // On récupère l'userId
+//   let postId = req.params.id // On récupère l'id de la sauce
+
+//   // Utilisation de la structure conditionnelle Switch/Case 
+//   //(qui permet de sélectionner un ensemble d’instructions à exécuter 
+//   //en fonction de la valeur d’une variable)
   
-  switch (like) {
-    case 1 : // Pour ajouter un like 
-        Post.updateOne({ _id: sauceId }, { $push: { usersLiked: userId }, $inc: { likes: +1 }}) // On utilise la fonction updateOne() pour mettre à jour le like de l'userId sur la sauceId
-          .then(() => res.status(200).json({ message: `J'aime` }))
-          .catch((error) => res.status(400).json({ error }))
+//   switch (like) {
+//     case 1 : // Pour ajouter un like 
+//         Post.updateOne({ _id: postId }, { $push: { usersLiked: userId }, $inc: { likes: +1 }}) // On utilise la fonction updateOne() pour mettre à jour le like de l'userId sur la sauceId
+//           .then(() => res.status(200).json({ message: `J'aime` }))
+//           .catch((error) => res.status(400).json({ error }))
             
-      break;
+//       break;
 
     // case 0 : // Pour retirer un like ou un dislike
     //     Sauce.findOne({ _id: sauceId })
@@ -155,7 +166,7 @@ exports.likePost = (req, res, next) => {
     //       .catch((error) => res.status(400).json({ error }))
     //   break;
       
-      default:
-        console.log(error);
-  }
-}
+//       default:
+//         console.log(error);
+//   }
+// }
