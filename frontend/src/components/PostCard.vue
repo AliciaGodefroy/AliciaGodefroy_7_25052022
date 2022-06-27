@@ -19,10 +19,9 @@
         <!-- Si l'utilisateur est admin ou si le userId correpsondant à l'UserId
         de la publication alors on affiche l'icone modifier -->
         <div class="icons" v-if="userId == post.userId || isAdmin">
-          <a class="link" :href="'/post/edit/' + post._id">
-            <span>D</span>
+          <router-link :to="{name:'EditPost', params: {id:post._id} }">
             <font-awesome-icon icon="fa-solid fa-pen-to-square" class="card__icon1"/>
-          </a>
+          </router-link>
           <font-awesome-icon icon="fa-solid fa-trash" @click="deletePost(post)"
           class="card__icon2"/>
         </div>
@@ -68,10 +67,6 @@ export default {
     // this.getLikes();
   },
   methods: {
-    // // Récupérer le nombre de likes
-    // getLikes() {
-    //   this.likes = post.likes
-    // },
     // Récupérer le pseudo de l'utilisateur depuis le localStorage
     getPseudo() {
       const user = JSON.parse(localStorage.getItem('user'));
@@ -94,16 +89,12 @@ export default {
       const header = { headers: { Authorization: 'Bearer ' + AccessToken } };
       // eslint-disable-next-line  prefer-template
       Axios
-        // eslint-disable-next-line  prefer-template
         .get('http://localhost:3000/api/post/', header)
-        .then(
-          // eslint-disable-next-line no-return-assign
-          (response) => (
-            // eslint-disable-next-line no-sequences
-            (this.posts = response.data),
-            (this.user = JSON.stringify(response.data.userId))
-          ),
-        )
+        .then((response) => {
+          console.log('response', response);
+          this.posts = response.data;
+          this.user = JSON.stringify(response.data.userId);
+        })
         .catch((error) => console.log(error));
     },
     // Modifier une publication
@@ -173,11 +164,14 @@ export default {
       Axios
         // eslint-disable-next-line prefer-template
         .post('http://localhost:3000/api/post/' + post._id + '/like', data, header)
-        .then((res) => res.json())
+        .then(() => {
+          // res.json()
+          this.getAllPosts();
+        })
         // eslint-disable-next-line no-shadow
-        .then((data) => this.likes.push(data))
+        // .then((data) => this.likes.push(data))
         .catch((error) => console.log(error));
-      this.liked = true; // <- on indiquer à notre template que le user à liker ce post
+      this.liked = true; // <- on indique à notre template que le user à liker ce post
     },
   },
 };

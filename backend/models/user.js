@@ -3,7 +3,9 @@ const uniqueValidator = require('mongoose-unique-validator');
 
 const userSchema = mongoose.Schema({
   pseudo: { type: String, required: true },
-  email: { type: String, required: true, unique: true }, // "unique: true" pour que ce soit impossible de s'inscrire deux fois avec la même adresse mail
+  email: { type: String, required: true, unique: true }, 
+  // "unique: true" pour que ce soit impossible de s'inscrire 
+  // deux fois avec la même adresse mail
   password: { type: String, required: true }, 
   isAdmin: { type: Boolean,required: false},
 });

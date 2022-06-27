@@ -17,9 +17,11 @@
           alt="picture" />
         </section>
         <footer class="edit__footer">
-          <button @click="updatePost">
+          <router-link to="/home">
+            <button @click="updatePost">
             Modifier
           </button>
+          </router-link>
         </footer>
       </div>
     </div>
@@ -36,12 +38,13 @@ export default {
     'home-header': HomeHeader,
   },
   // eslint-disable-next-line object-shorthand
-  data: function () {
+  data() {
     return {
       pseudo: '',
       userId: '',
       editedText: '',
       imageUrl: '',
+      isAdmin: false,
     };
   },
   mounted() {
@@ -57,7 +60,8 @@ export default {
     },
     // On récupère le rôle stocké dans le Store Vuex
     getIsAdmin() {
-      this.isAdmin = this.$store.getters.isAdmin;
+      console.log('checkisAdmin in edit posts');
+      return this.$store.getters.isAdmin;
     },
     selectFile() {
       // eslint-disable-next-line prefer-destructuring
@@ -82,7 +86,7 @@ export default {
           console.log('response to updatePost');
           console.log(response.data.message);
           // eslint-disable-next-line no-restricted-globals
-          this.$router.push('/home');
+          // this.$router.push('/home');
         })
         .catch((err) => {
           console.log(err);
