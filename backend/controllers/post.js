@@ -31,13 +31,12 @@ exports.modifyPost = (req, res, next) => {
     User.findOne({
       _id: decodedUserId
     }).then((dataUser) => {
-      // On compare l'userId de la sauce avec l'userId du Token
+      // On compare l'userId du post avec l'userId du Token
     if (data.userId == decodedUserId || dataUser.isAdmin == true) {
       console.log('data.userId', data.userId)
       console.log('decodedUserId', decodedUserId)
       const postObject = req.file ?
         {
-          // ...JSON.parse(req.body.post),
           imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
         } : { ...req.body };
       Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })

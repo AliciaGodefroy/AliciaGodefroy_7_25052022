@@ -11,10 +11,15 @@
       <img :src="post.imageUrl" alt= 'image publiée' class= "card__image"/>
       <footer class="card__footer">
         <div class="card__footer--right">
-          <font-awesome-icon icon="fa-solid fa-heart"
-          v-if="!liked"
+          <button class="heart-button">
+            <font-awesome-icon icon="fa-solid fa-heart"
+            v-if="!liked"
+            @click="likePost(post)" class="card__icon3"/>
+          </button>
+          <span>{{post.likes}} likes</span>
+          <!-- <font-awesome-icon icon="fa-solid fa-heart"
           @click="likePost(post)" class="card__icon3"/>
-          <span>{{post.likes}}</span>
+          <span>{{post.likes}} likes</span> -->
         </div>
         <!-- Si l'utilisateur est admin ou si le userId correpsondant à l'UserId
         de la publication alors on affiche l'icone modifier -->
@@ -64,7 +69,7 @@ export default {
     this.getAllPosts();
     this.getUserId();
     this.getIsAdmin();
-    // this.getLikes();
+    // this.checkIfUsersLiked();
   },
   methods: {
     // Récupérer le pseudo de l'utilisateur depuis le localStorage
@@ -140,15 +145,13 @@ export default {
         });
     },
     // Vérifier si l'utilisateur à déjà liké le post
-    async isLiked(post) {
-      // eslint-disable-next-line prefer-template
-      const resLikes = await Axios('http://localhost:3000/api/posts/' + post._id + '/likes');
-      const dataLikes = await resLikes.json();
-      dataLikes.forEach((likes) => {
-        // eslint-disable-next-line no-unused-expressions
-        likes.userId === this.userId ? this.usersLiked = true : this.likes = false;
-      });
-      return dataLikes;
+    checkIfUsersLiked(post) {
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (user.userId === post.usersLiked) {
+        console.log('usersLiked', post.usersLiked);
+        this.liked = true;
+      }
+      this.getAllPosts();
     },
     // Liker le post
     likePost(post) {
@@ -287,8 +290,15 @@ export default {
   color: black;
 }
 
-.card__icon3:checked{
-  color: #FD2D01;
+.heart-button{
+  background-color: white;
+  border: white;
+}
+
+.heart-button:focus{
+  .card__icon3{
+    color: #FD2D01;
+  }
 }
 
 .like__button{
