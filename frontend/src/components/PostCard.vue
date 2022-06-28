@@ -145,14 +145,15 @@ export default {
         });
     },
     // Vérifier si l'utilisateur à déjà liké le post
-    checkIfUsersLiked(post) {
-      const user = JSON.parse(localStorage.getItem('user'));
-      if (user.userId === post.usersLiked) {
-        console.log('usersLiked', post.usersLiked);
-        this.liked = true;
-      }
-      this.getAllPosts();
-    },
+    // checkIfUsersLiked(post) {
+    //   const user = JSON.parse(localStorage.getItem('user'));
+    //   console.log('post', post);
+    //   if (user.userId === post.usersLiked) {
+    //     console.log('usersLiked', post.usersLiked);
+    //     this.liked = true;
+    //   }
+    //   this.getAllPosts();
+    // },
     // Liker le post
     likePost(post) {
       const user = JSON.parse(localStorage.getItem('user'));
