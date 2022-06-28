@@ -17,11 +17,9 @@
           alt="picture" />
         </section>
         <footer class="edit__footer">
-          <router-link to="/home">
-            <button @click="updatePost">
+          <button @click="updatePost">
             Modifier
           </button>
-          </router-link>
         </footer>
       </div>
     </div>
@@ -86,7 +84,7 @@ export default {
           console.log('response to updatePost');
           console.log(response.data.message);
           // eslint-disable-next-line no-restricted-globals
-          // this.$router.push('/home');
+          this.$router.push('/home');
         })
         .catch((err) => {
           console.log(err);

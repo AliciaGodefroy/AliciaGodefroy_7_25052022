@@ -135,7 +135,6 @@ export default {
           console.log('this is response from deletePost');
           console.log(response.data.post);
         })
-        // On refait un get derrière pour MAJ
         .then(() => {
           this.getAllPosts();
         })
