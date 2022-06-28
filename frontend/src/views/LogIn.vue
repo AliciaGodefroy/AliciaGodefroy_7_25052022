@@ -19,3 +19,19 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+
+.content{
+  @media screen and (min-width: 1025px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px){
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+</style>

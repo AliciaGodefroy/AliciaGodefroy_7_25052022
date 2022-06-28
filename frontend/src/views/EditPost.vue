@@ -97,17 +97,51 @@ export default {
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:wght@400;500&family=Shrikhand&display=swap');
 
+.container{
+  @media screen and (min-width: 1025px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px){
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.header{
+  @media screen and (min-width: 1025px) {
+    width: 50%;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px){
+    width: 50%;
+  }
+}
+
 h3{
   color: white;
   display: flex;
   align-items: flex-start;
   margin: 20px 10px;
+  @media screen and (min-width: 1025px) {
+    width: 50%;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px){
+    width: 50%;
+  }
 }
 
 .edit{
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  @media screen and (min-width: 1025px) {
+    width: 50%;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px){
+    width: 50%;
+  }
   &__main {
     padding: 15px 15px 0 15px;
     textarea{

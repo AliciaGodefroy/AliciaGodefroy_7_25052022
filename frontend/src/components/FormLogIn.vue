@@ -82,6 +82,12 @@ $color-tertiary : #4E5166;
   border-radius: 5px;
   padding: 20px;
   margin: 0 30px;
+   @media screen and (min-width: 1025px) {
+    width: 50%;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px){
+    width: 50%;
+  }
 }
 
 .form {
