@@ -13,12 +13,10 @@
         <div class="card__footer--right">
           <button class="heart-button">
             <font-awesome-icon icon="fa-solid fa-heart"
+            v-if="checkIfUsersLiked(post)"
             @click="likePost(post)" class="card__icon3"/>
           </button>
           <span>{{post.likes}} likes</span>
-          <!-- <font-awesome-icon icon="fa-solid fa-heart"
-          @click="likePost(post)" class="card__icon3"/>
-          <span>{{post.likes}} likes</span> -->
         </div>
         <!-- Si l'utilisateur est admin ou si le userId correpsondant à l'UserId
         de la publication alors on affiche l'icone modifier -->
@@ -68,7 +66,6 @@ export default {
     this.getAllPosts();
     this.getUserId();
     this.getIsAdmin();
-    // this.checkIfUsersLiked();
   },
   methods: {
     // Récupérer le pseudo de l'utilisateur depuis le localStorage
@@ -143,15 +140,15 @@ export default {
         });
     },
     // Vérifier si l'utilisateur à déjà liké le post
-    // checkIfUsersLiked(post) {
-    //   const user = JSON.parse(localStorage.getItem('user'));
-    //   console.log('post', post);
-    //   if (user.userId === post.usersLiked) {
-    //     console.log('usersLiked', post.usersLiked);
-    //     this.liked = true;
-    //   }
-    //   this.getAllPosts();
-    // },
+    checkIfUsersLiked(post) {
+      const user = JSON.parse(localStorage.getItem('user'));
+      console.log('post', post);
+      console.log('user', user.userId);
+      if (post.usersLiked.includes(user.userId)) {
+        return false;
+      }
+      return true;
+    },
     // Liker le post
     likePost(post) {
       const user = JSON.parse(localStorage.getItem('user'));
@@ -248,6 +245,7 @@ export default {
   &__footer{
     display: flex;
     justify-content: space-between;
+    padding-bottom: 5px;
   }
   &__footer--right{
     display: flex;
