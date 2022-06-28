@@ -294,6 +294,7 @@ export default {
 .heart-button{
   background-color: white;
   border: white;
+  border-radius: 10px;
 }
 
 .heart-button:focus{
