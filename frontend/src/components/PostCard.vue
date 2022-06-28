@@ -13,7 +13,6 @@
         <div class="card__footer--right">
           <button class="heart-button">
             <font-awesome-icon icon="fa-solid fa-heart"
-            v-if="!liked"
             @click="likePost(post)" class="card__icon3"/>
           </button>
           <span>{{post.likes}} likes</span>
